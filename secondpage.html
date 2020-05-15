@@ -93,21 +93,24 @@
 
   <script type="text/javascript">//<![CDATA[
 
-
+    
+// Creates a canvas element, acts as a sort of image.
 var c = document.getElementById("myCanvas");
+// Creates a context for 2D elements, a way to set up the ability to draw objects on it.
 var ctx = c.getContext("2d");
 
 // Get the canvas element form the page
 var canvas = document.getElementById("myCanvas");
  
-/* Rresize the canvas to occupy the full page, 
+/* Resize the canvas to occupy the full page, 
    by getting the widow width and height and setting it to canvas*/
  
 canvas.width  = window.innerWidth;
 canvas.height = window.innerHeight;
  
-//Done! Enjoy full page canvas!
+//Done! Enjoy full page canvas! ~ HEMANTH.HM
 
+//More things on the screen! As a rule of thumb the more there are the more lag will occur
 var numberOfBalls = 300;
 var maxSize = 75;
 var colourList = ["lightblue", "violet", "grey", "silver"];
