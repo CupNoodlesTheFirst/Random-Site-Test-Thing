@@ -11,3 +11,5 @@ icon designer: Outlier Solutions
 icon designer link: /BeTheOutlier
 
 Made from site: https://www.namecheap.com/
+
+So uh... Thanks for all of those fellows!
