@@ -69,55 +69,6 @@
   <script id="insert"></script>
 
 
-    <script>
-      const customConsole = (w) => {
-        const pushToConsole = (payload, type) => {
-          w.parent.postMessage({
-            console: {
-              payload: payload,
-              type:    type
-            }
-          }, "*")
-        }
-
-        w.onerror = (message, url, line, column) => {
-          // the line needs to correspond with the editor panel
-          // unfortunately this number needs to be altered every time this view is changed
-          line = line - 79
-          if (line < 0){
-            pushToConsole(message, "error")
-          } else {
-            pushToConsole(`[${line}:${column}] ${message}`, "error")
-          }
-        }
-
-        w.console = (function(){
-          return {
-            log: (payload) => {
-              pushToConsole(payload, "log")
-            },
-            info: (payload) => {
-              pushToConsole(payload, "info")
-            },
-            warn: (payload) => {
-              pushToConsole(payload, "warn")
-            },
-            error: (payload) => {
-              pushToConsole(payload, "error")
-            },
-            system: (payload) => {
-              pushToConsole(payload, "system")
-            }
-          }
-        }())
-
-        console.system("Running fiddle")
-      }
-
-      if (window.parent){
-        customConsole(window)
-      }
-    </script>
 </head>
 <body>
     <!-- dic is a generic HTML element, meaning 'division', or 'divide' -->
@@ -129,7 +80,7 @@
   </h1>
   <br>
   <div>
-      <img id="myImage" src="https://raw.githubusercontent.com/CupNoodlesTheFirst/Random-Site-Test-Thing/master/VKcover.png" >
+      <img id="myImage" src="VKcover.png" >
   </div>
   <div>
     <div class="text-border">
@@ -319,22 +270,6 @@ myButtonEl.addEventListener('click', ButtonClicked);
     window.name = "result"
   </script>
 
-    <script>
-      let allLines = []
-
-      window.addEventListener("message", (message) => {
-        if (message.data.console){
-          let insert = document.querySelector("#insert")
-          allLines.push(message.data.console.payload)
-          insert.innerHTML = allLines.join(";\r")
-
-          let result = eval.call(null, message.data.console.payload)
-          if (result !== undefined){
-            console.log(result)
-          }
-        }
-      })
-    </script>
 
 </body>
 </html>
