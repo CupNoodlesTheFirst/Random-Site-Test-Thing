@@ -1,6 +1,9 @@
 # Random-Site-Test-Thing
 Just a test! May also be nice to harvest through for more ideas or something.
 
+Link to the test website-- don't know if i'll change it much after today but it's a fun test.
+https://cupnoodlesthefirst.github.io/Random-Site-Test-Thing/
+
 Logo stuff credits!
 font name: IBMPlexSerif-SemiBold
 font link: https://fonts.google.com/specimen/IBM+Plex+Serif
