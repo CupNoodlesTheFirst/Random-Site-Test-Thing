@@ -53,6 +53,7 @@ z-index:-1;
 }
 
 .vertical-menu {
+  height: 200px; /* Height of menu */
   width: 200px; /* Set a width if you like */
 }
 
