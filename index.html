@@ -68,6 +68,55 @@
   <script id="insert"></script>
 
 
+    <script>
+      const customConsole = (w) => {
+        const pushToConsole = (payload, type) => {
+          w.parent.postMessage({
+            console: {
+              payload: payload,
+              type:    type
+            }
+          }, "*")
+        }
+
+        w.onerror = (message, url, line, column) => {
+          // the line needs to correspond with the editor panel
+          // unfortunately this number needs to be altered every time this view is changed
+          line = line - 79
+          if (line < 0){
+            pushToConsole(message, "error")
+          } else {
+            pushToConsole(`[${line}:${column}] ${message}`, "error")
+          }
+        }
+
+        w.console = (function(){
+          return {
+            log: (payload) => {
+              pushToConsole(payload, "log")
+            },
+            info: (payload) => {
+              pushToConsole(payload, "info")
+            },
+            warn: (payload) => {
+              pushToConsole(payload, "warn")
+            },
+            error: (payload) => {
+              pushToConsole(payload, "error")
+            },
+            system: (payload) => {
+              pushToConsole(payload, "system")
+            }
+          }
+        }())
+
+        console.system("Running fiddle")
+      }
+
+      if (window.parent){
+        customConsole(window)
+      }
+    </script>
 </head>
 <body>
     <!-- dic is a generic HTML element, meaning 'division', or 'divide' -->
@@ -178,18 +227,18 @@
     <li>Have colour palettes and add some colour</li>
     <li>Created a menu which somewhat works</li>
     <li>Created a free logo using <a href="https://www.namecheap.com/">Namecheap Free logo maker</a></li>
-    <li>Add some simple javascript: make a button that changes colour when clicked</li>
-    <li>Add an image to your page</li>
+    <li>Added some simple javascript: make a button that changes colour when clicked</li>
+    <li>Added an image to your page</li>
+    <li>Created a github repository for code</li>
+    <li>Added an image asset to github repo</li>
+    <li>Added the image from github repo to site</li>
+    <li>Added site code to github repository</li>
     </ol>
     <p class="text-block">
       To-do
     </p>
   </div>
   <ol>
-    <li>Create a github repository for your code</li>
-    <li>Add an image asset to your github repo</li>
-    <li>Add the image from your github repo to your site</li>
-    <li>Add your site code to your github repository</li>
     <li>Host your site on github</li>
     <li>Create a second page for your site in jsfiddle</li>
     <li>Add your second page to your github repo</li>
@@ -269,6 +318,22 @@ myButtonEl.addEventListener('click', ButtonClicked);
     window.name = "result"
   </script>
 
+    <script>
+      let allLines = []
+
+      window.addEventListener("message", (message) => {
+        if (message.data.console){
+          let insert = document.querySelector("#insert")
+          allLines.push(message.data.console.payload)
+          insert.innerHTML = allLines.join(";\r")
+
+          let result = eval.call(null, message.data.console.payload)
+          if (result !== undefined){
+            console.log(result)
+          }
+        }
+      })
+    </script>
 
 </body>
 </html>
